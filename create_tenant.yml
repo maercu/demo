@@ -1,0 +1,16 @@
+- name: Create a tenant
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    apic_info: &apic_info
+      host: "{{ apic_ip }}"
+      username: "{{ apic_username }}"
+      password: "{{ apic_password }}"
+      validate_certs: no
+  tasks:
+  - name: Add a new tenant
+    aci_tenant:
+      <<: *apic_info
+      tenant: "{{ tenant }}"
+      description: "{{ tenant_description }}"
